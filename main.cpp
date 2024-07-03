@@ -1,6 +1,7 @@
 #include <iostream>
 #include "./serial/SerialCom.hpp"
 #include "./interpreters/LoRa/LoRaInterpreter.hpp"
+#include "./dataBase/Database.hpp"
 
 #define TTY_NAME "/dev/ttyS2"
 #define TTY_BAUD_RATE 115200
@@ -10,6 +11,10 @@ int main()
     SerialCom serialCom;
     serialCom.init(TTY_NAME, TTY_BAUD_RATE);
     serialCom.send("Teste Jean");
+
+    Database database;
+    database.init();
+    database.createBaseTables();
 
     if(LoRaInterpreter::checkSintax("Teste Jean"))
     {
